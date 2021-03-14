@@ -13,7 +13,7 @@ export DOCKER_BUILDKIT=1
 ```
 then
 ```
-> go get github.com/skroczek/redis2http
+> git clone https://github.com/skroczek/redis2http.git
 > make PLATFORM=linux/amd64
 > bin/redis2http
 ```
