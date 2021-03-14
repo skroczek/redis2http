@@ -1,0 +1,31 @@
+[Unit]
+Description=Service to serve redis map as txt over http
+After=network.target
+
+[Service]
+Type=simple
+User=nobody
+Group=nobody
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=10
+startLimitIntervalSec=60
+
+
+ExecStart=/usr/local/bin/redis2http
+
+# make sure log directory exists and owned by syslog
+PermissionsStartOnly=true
+#ExecStartPre=/bin/mkdir -p /var/log/redis2http
+#ExecStartPre=/bin/chown syslog:adm /var/log/redis2http
+#ExecStartPre=/bin/chmod 755 /var/log/redis2http
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=redis2http
+
+[Install]
+WantedBy=multi-user.target
+
+
+# https://fabianlee.org/2017/05/21/golang-running-a-go-binary-as-a-systemd-service-on-ubuntu-16-04/
